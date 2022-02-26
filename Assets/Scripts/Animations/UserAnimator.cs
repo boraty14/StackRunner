@@ -1,18 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using User;
 
-public class UserAnimator : MonoBehaviour
+namespace Animations
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UserAnimator : MonoBehaviour
     {
-        
-    }
+        private Animator _animator;
+        private UserStack _userStack;
+        private static readonly int StackRatio = Animator.StringToHash("stackRatio");
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+        }
+
+        private void Start()
+        {
+            _userStack = GetComponent<UserStack>();
+            _userStack.OnStackRatioChange += OnStackRatioChange;
+        }
+
+        private void OnDisable()
+        {
+            _userStack.OnStackRatioChange -= OnStackRatioChange;
+        }
+
+        private void OnStackRatioChange(float newRatio)
+        {
+            _animator.SetFloat(StackRatio,newRatio);
+        }
     }
 }
