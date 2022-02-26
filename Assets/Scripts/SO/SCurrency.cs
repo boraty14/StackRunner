@@ -8,6 +8,7 @@ namespace SO
     {
         [field :Title("Currency Settings")]
         [field: SerializeField] public int CurrencyValue { get; private set; }
+        [field: SerializeField] public float CurrencyDestroyDuration { get; private set; }
         [field: SerializeField] public ParticleSystem CollectParticle { get; private set; }
 
     }

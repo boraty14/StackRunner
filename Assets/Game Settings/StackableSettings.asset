@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff5e7b7e78f179458c56f70bfff84d8, type: 3}
   m_Name: StackableSettings
   m_EditorClassIdentifier: 
+  <StackParticle>k__BackingField: {fileID: 198985388140249450, guid: f36719335e2592340b7bbb6a8ea33882, type: 3}

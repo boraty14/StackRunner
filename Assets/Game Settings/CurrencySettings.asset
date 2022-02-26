@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: CurrencySettings
   m_EditorClassIdentifier: 
   <CurrencyValue>k__BackingField: 1
+  <CurrencyDestroyDuration>k__BackingField: 0.5
+  <CollectParticle>k__BackingField: {fileID: 198759441112702650, guid: ec5dead71a3be2046a4e57ab9fb113a9, type: 3}

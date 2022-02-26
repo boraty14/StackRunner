@@ -6,7 +6,7 @@ namespace Interactables
 {
     public abstract class Interactable : MonoBehaviour
     {
-        private Animator _animator;
+        protected Animator _animator;
         private Collider _collider;
 
         protected abstract ParticleSystem InteractionParticle { get;}

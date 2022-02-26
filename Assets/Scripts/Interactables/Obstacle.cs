@@ -14,6 +14,7 @@ namespace Interactables
         protected override void OnInteract(Collider other)
         {
             other.GetComponent<UserStack>().RemoveStack(obstacleSettings.StackDropAmount);
+            _animator.gameObject.SetActive(false);
             Destroy(gameObject,obstacleSettings.ObstacleDestroyDuration);
         }
     }

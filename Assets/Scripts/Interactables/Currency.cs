@@ -13,6 +13,8 @@ namespace Interactables
         protected override void OnInteract(Collider other)
         {
             other.GetComponent<UserCurrency>().AddCurrency(currencySettings.CurrencyValue);
+            _animator.gameObject.SetActive(false);
+            Destroy(gameObject,currencySettings.CurrencyDestroyDuration);
         }
     }
 }

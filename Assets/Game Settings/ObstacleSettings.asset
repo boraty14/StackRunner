@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: ObstacleSettings
   m_EditorClassIdentifier: 
   <StackDropAmount>k__BackingField: 2
+  <ObstacleDestroyDuration>k__BackingField: 0.5
+  <HitParticle>k__BackingField: {fileID: 198976222948764990, guid: 73043e7e6fb36e342b9337207bf317d9, type: 3}
