@@ -8,6 +8,8 @@ namespace Interactables
     {
         [SerializeField] private SCurrency currencySettings;
         
+        protected override ParticleSystem InteractionParticle => currencySettings.CollectParticle;
+        
         protected override void OnInteract(Collider other)
         {
             other.GetComponent<UserCurrency>().AddCurrency(currencySettings.CurrencyValue);

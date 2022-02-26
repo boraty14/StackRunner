@@ -8,6 +8,10 @@ namespace Interactables
     {
         private Animator _animator;
         private Collider _collider;
+
+        protected abstract ParticleSystem InteractionParticle { get;}
+        
+        protected abstract void OnInteract(Collider other);
         
         private void Awake()
         {
@@ -18,6 +22,7 @@ namespace Interactables
         private void OnTriggerEnter(Collider other)
         {
             if(!other.CompareTag("Player")) return;
+            Instantiate(InteractionParticle, transform);
             ResetModel();
             OnInteract(other);
         }
@@ -29,7 +34,5 @@ namespace Interactables
             _animator.transform.rotation = Quaternion.Euler(Vector3.zero);
             _animator.transform.localPosition = Vector3.zero;
         }
-
-        protected abstract void OnInteract(Collider other);
     }
 }

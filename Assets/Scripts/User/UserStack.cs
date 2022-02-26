@@ -10,7 +10,7 @@ namespace User
     public class UserStack : MonoBehaviour
     {
         [SerializeField] private SUser userSettings;
-        private Stack<Transform> _stackables;
+        private List<Transform> _stackables;
         private Transform _stackBasePoint;
         private int _stackLimit;
 
@@ -23,14 +23,14 @@ namespace User
         private void Awake()
         {
             _stackBasePoint = transform.Find("StackBasePoint");
-            _stackables = new Stack<Transform>();
+            _stackables = new List<Transform>();
         }
 
         public void AddStack(Transform stackTransform)
         {
             if (_stackables.Count == userSettings.StackLimit) return;
             stackTransform.SetParent(transform, true);
-            _stackables.Push(stackTransform);
+            _stackables.Add(stackTransform);
             OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
             StartCoroutine(ReplaceStackRoutine(stackTransform));
         }
@@ -39,7 +39,13 @@ namespace User
         {
             if (_stackables.Count == 0) return;
             if (amount > _stackables.Count) amount = _stackables.Count;
-            //TODO remove stacks
+            for (int i = 0; i < amount; i++)
+            {
+                Transform currentStack = _stackables[_stackables.Count - 1];
+                currentStack.DOScale(Vector3.zero, userSettings.StackDestroyDuration)
+                    .SetEase(userSettings.StackDestroyEase).OnComplete(() => Destroy(currentStack.gameObject));
+                _stackables.RemoveAt(_stackables.Count - 1);
+            }
         }
 
         private IEnumerator ReplaceStackRoutine(Transform stackTransform)
@@ -53,8 +59,6 @@ namespace User
             replaceSequence.Join(stackTransform.DOLocalRotate(Vector3.zero, userSettings.StackCollectDuration)
                 .SetEase(userSettings.StackCollectEase));
             yield return replaceSequence.WaitForCompletion();
-            
-            //TODO add spring joint
         }
     }
 }
