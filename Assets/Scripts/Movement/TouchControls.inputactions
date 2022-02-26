@@ -1,0 +1,33 @@
+{
+    "name": "TouchControls",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "ff997b7d-2de7-4a87-a44c-77282efd9050",
+            "actions": [
+                {
+                    "name": "PrimaryDrag",
+                    "type": "PassThrough",
+                    "id": "fe543035-c1dd-46df-b773-ddb41b48ca2e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f15be02f-7924-44f0-b42d-ad62d05c20d7",
+                    "path": "<Touchscreen>/primaryTouch/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryDrag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
