@@ -12,6 +12,7 @@ namespace User
         [SerializeField] private SUser userSettings;
         private Stack<Transform> _stackables;
         private Transform _stackBasePoint;
+        private int _stackLimit;
 
         #region Events
 
@@ -27,8 +28,10 @@ namespace User
 
         public void AddStack(Transform stackTransform)
         {
+            if (_stackables.Count == userSettings.StackLimit) return;
             stackTransform.SetParent(transform, true);
             _stackables.Push(stackTransform);
+            OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
             StartCoroutine(ReplaceStackRoutine(stackTransform));
         }
 

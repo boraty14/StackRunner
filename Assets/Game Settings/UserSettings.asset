@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e546864e1d18b1746ab620964bc6153c, type: 3}
   m_Name: UserSettings
   m_EditorClassIdentifier: 
-  <UserVerticalSpeed>k__BackingField: 5
-  <UserHorizontalSpeed>k__BackingField: 1
-  <DefaultStackLimit>k__BackingField: 5
+  <VerticalSpeed>k__BackingField: 5
+  <HorizontalSpeed>k__BackingField: 5
+  <HorizontalLimit>k__BackingField: 2
+  <StackLimit>k__BackingField: 4
   <StackCollectOffset>k__BackingField: 1
   <StackCollectDuration>k__BackingField: 1
   <StackCollectEase>k__BackingField: 2

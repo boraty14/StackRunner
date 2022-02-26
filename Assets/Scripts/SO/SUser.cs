@@ -8,11 +8,12 @@ namespace SO
     public class SUser : ScriptableObject
     {
         [Title("Movement Settings")]
-        [field: SerializeField] public float UserVerticalSpeed { get; private set; }
-        [field: SerializeField] public float UserHorizontalSpeed { get; private set; }
+        [field: SerializeField] public float VerticalSpeed { get; private set; }
+        [field: SerializeField] public float HorizontalSpeed { get; private set; }
+        [field: SerializeField][field: Range(0,10f)] public float HorizontalLimit { get; private set; }
         
         [Title("Stack Collect Settings")]
-        [field: SerializeField] public int DefaultStackLimit { get; private set; }
+        [field: SerializeField] public int StackLimit { get; private set; }
         [field: SerializeField] public float StackCollectOffset { get; private set; }
         [field: SerializeField] public float StackCollectDuration { get; private set; }
         [field: SerializeField] public Ease StackCollectEase { get; private set; }

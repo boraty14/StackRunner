@@ -1,24 +1,89 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &488480794836013671
+--- !u!95 &7854754765356414514
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7043867338141928318}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74384ab18276381499c3a5cec4b88141, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &7854754764666668632
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7854754764666668633}
+  - component: {fileID: 1626609659}
+  - component: {fileID: 1626609658}
+  m_Layer: 0
+  m_Name: Obstacle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7854754764666668633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7854754764666668632}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7677239519180837316}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1626609659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722272899706842471}
+  m_GameObject: {fileID: 7854754764666668632}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0810c083a32fc984d8188de8b9978a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSettings: {fileID: 11400000, guid: 6cce3be2b7796f3439149fe310310084, type: 2}
---- !u!1001 &488480794401558582
+--- !u!65 &1626609658
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7854754764666668632}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6462365, y: 1.6322685, z: 0.120085046}
+  m_Center: {x: 0.0011360049, y: -0.018101454, z: -0.0024759863}
+--- !u!1001 &7854754765356414511
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 7854754764666668633}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 35aa951101d09468da506d80d6943c74, type: 3}
       propertyPath: m_RootOrder
@@ -70,8 +135,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35aa951101d09468da506d80d6943c74, type: 3}
---- !u!1 &722272899706842471 stripped
+--- !u!1 &7043867338141928318 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 35aa951101d09468da506d80d6943c74, type: 3}
-  m_PrefabInstance: {fileID: 488480794401558582}
+  m_PrefabInstance: {fileID: 7854754765356414511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7677239519180837316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 35aa951101d09468da506d80d6943c74, type: 3}
+  m_PrefabInstance: {fileID: 7854754765356414511}
   m_PrefabAsset: {fileID: 0}
