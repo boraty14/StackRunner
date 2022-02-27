@@ -1,13 +1,19 @@
-using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 namespace Utils
 {
     public static class UnityUtils
     {
-        public static Vector3 ScreenToWorldPosition(Camera camera, Vector3 screenPosition)
+        private static readonly Random Rng = new Random(); 
+        public static void ShuffleList<T>(this IList<T> shuffleList)
         {
-            screenPosition.z = camera.nearClipPlane;
-            return camera.ScreenToWorldPoint(screenPosition);
+            int n = shuffleList.Count;  
+            while (n > 1) {  
+                n--;  
+                int k = Rng.Next(n + 1);  
+                (shuffleList[k], shuffleList[n]) = (shuffleList[n], shuffleList[k]);
+            }  
         }
     }
 }
