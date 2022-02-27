@@ -15,9 +15,8 @@ namespace User
         private int _stackLimit;
 
         #region Events
-
         public Action<float> OnStackRatioChange;
-
+        public Action OnHitObstacle;
         #endregion
 
         private void Awake()
@@ -37,6 +36,7 @@ namespace User
 
         public void RemoveStack(int amount)
         {
+            OnHitObstacle?.Invoke();
             if (_stackables.Count == 0) return;
             if (amount > _stackables.Count) amount = _stackables.Count;
             for (int i = 0; i < amount; i++)
@@ -46,6 +46,7 @@ namespace User
                     .SetEase(userSettings.StackDestroyEase).OnComplete(() => Destroy(currentStack.gameObject));
                 _stackables.RemoveAt(_stackables.Count - 1);
             }
+            OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
         }
 
         private IEnumerator ReplaceStackRoutine(Transform stackTransform)

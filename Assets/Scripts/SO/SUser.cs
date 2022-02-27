@@ -22,6 +22,15 @@ namespace SO
         [field :Title("Stack Drop Settings")]
         [field: SerializeField] public float StackDestroyDuration { get; private set; }
         [field: SerializeField] public Ease StackDestroyEase { get; private set; }
+        
+        [field :Title("Animation Settings")]
+        [field: SerializeField][field: Range(0f,1f)] public float CrossFadePercentage { get; private set; }
+        
+        [field :Title("Particle Settings")]
+        [field: SerializeField] public ParticleSystem WinParticle { get; private set; }
+        [field: SerializeField] public ParticleSystem HitParticle { get; private set; }
+        [field: SerializeField] public ParticleSystem TrailParticle { get; private set; }
+
 
 
     }

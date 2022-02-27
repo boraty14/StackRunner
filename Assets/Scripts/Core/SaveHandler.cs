@@ -4,25 +4,23 @@ using Utils;
 
 namespace Core
 {
-    public class SaveHandler : MonoBehaviourSingleton<SaveHandler>
+    public static class SaveHandler
     {
-        [SerializeField] private SUser userSettings;
-        
         private const string LevelString = "Level";
         private const string CurrencyString = "Currency";
         private const string StartingStackString = "StartingStack";
 
-        public void SaveLevel(int level) => PlayerPrefs.SetInt(LevelString, level);
+        public static void SaveLevel(int level) => PlayerPrefs.SetInt(LevelString, level);
 
-        public void SaveCurrency(int currency) => PlayerPrefs.SetInt(CurrencyString, currency);
+        public static void SaveCurrency(int currency) => PlayerPrefs.SetInt(CurrencyString, currency);
 
-        public void SaveStartingStack(int stackLimit) => PlayerPrefs.SetInt(StartingStackString, stackLimit);
+        public static void SaveStartingStack(int stackLimit) => PlayerPrefs.SetInt(StartingStackString, stackLimit);
         
-        public int LoadLevel() => PlayerPrefs.GetInt(LevelString, 0);
+        public static int LoadLevel() => PlayerPrefs.GetInt(LevelString, 0);
         
-        public int LoadCurrency() => PlayerPrefs.GetInt(CurrencyString, 0);
+        public static int LoadCurrency() => PlayerPrefs.GetInt(CurrencyString, 0);
         
-        public int LoadStackLimit() => PlayerPrefs.GetInt(StartingStackString, userSettings.StackLimit);
+        public static int LoadStartingStack() => PlayerPrefs.GetInt(StartingStackString, 0);
 
         
     }

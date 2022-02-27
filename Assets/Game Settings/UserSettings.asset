@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e546864e1d18b1746ab620964bc6153c, type: 3}
   m_Name: UserSettings
   m_EditorClassIdentifier: 
-  <VerticalSpeed>k__BackingField: 5
+  <VerticalSpeed>k__BackingField: 9
   <HorizontalSpeed>k__BackingField: 3
   <HorizontalLimit>k__BackingField: 3
   <StackLimit>k__BackingField: 10
@@ -22,3 +22,7 @@ MonoBehaviour:
   <StackCollectJumpPower>k__BackingField: 2
   <StackDestroyDuration>k__BackingField: 0.5
   <StackDestroyEase>k__BackingField: 2
+  <CrossFadePercentage>k__BackingField: 0.1
+  <WinParticle>k__BackingField: {fileID: 198825929368372608, guid: edf12e91890b8434eb8ea701f9bc40a2, type: 3}
+  <HitParticle>k__BackingField: {fileID: 198104090543139058, guid: 4430919f14c50f84085d287cbcb2c30e, type: 3}
+  <TrailParticle>k__BackingField: {fileID: 198096858069344474, guid: 2966910701d40974c87f0338bb5694e3, type: 3}

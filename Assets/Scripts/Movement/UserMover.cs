@@ -1,4 +1,5 @@
 using System;
+using Core;
 using SO;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +13,7 @@ namespace Movement
         private TouchControls _touchControls;
         private Vector3 _movementVector = Vector3.zero;
         private float _horizontalTarget = 0f;
+        private bool _isPlaying = false;
 
 
         private void Awake()
@@ -23,20 +25,35 @@ namespace Movement
         {
             _touchControls.Enable();
             _touchControls.Touch.PrimaryDrag.performed += OnDrag;
+            EventBus.OnTapToPlay += OnTapToPlay;
+            EventBus.OnLevelWin += OnLevelWin;
         }
 
         private void OnDisable()
         {
             _touchControls.Touch.PrimaryDrag.performed -= OnDrag;
             _touchControls.Disable();
+            EventBus.OnTapToPlay -= OnTapToPlay;
+            EventBus.OnLevelWin -= OnLevelWin;
         }
 
         private void Update()
         {
+            if (!_isPlaying) return;
             _movementVector = Vector3.zero;
             SetForwardMovement();
             SetHorizontalMovement();
             transform.Translate(_movementVector);
+        }
+        
+        private void OnLevelWin()
+        {
+            _isPlaying = false;
+        }
+
+        private void OnTapToPlay()
+        {
+            _isPlaying = true;
         }
 
         private void SetForwardMovement()

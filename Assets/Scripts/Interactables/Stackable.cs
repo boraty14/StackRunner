@@ -13,6 +13,7 @@ namespace Interactables
         protected override void OnInteract(Collider other)
         {
             other.GetComponent<UserStack>().AddStack(transform);
+            _animator.Play("StackCollect");
         }
     }
 }
