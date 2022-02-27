@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UserSettings
   m_EditorClassIdentifier: 
   <VerticalSpeed>k__BackingField: 5
-  <HorizontalSpeed>k__BackingField: 5
+  <HorizontalSpeed>k__BackingField: 3
   <HorizontalLimit>k__BackingField: 3
   <StackLimit>k__BackingField: 10
   <StackCollectOffset>k__BackingField: 0.75
