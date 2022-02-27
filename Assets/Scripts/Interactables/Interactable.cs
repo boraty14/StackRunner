@@ -30,9 +30,9 @@ namespace Interactables
         private void ResetModel()
         {
             _collider.enabled = false;
-            _animator.enabled = false;
-            _animator.transform.rotation = Quaternion.Euler(Vector3.zero);
-            _animator.transform.localPosition = Vector3.zero;
+            // _animator.enabled = false;
+            // _animator.transform.rotation = Quaternion.Euler(Vector3.zero);
+            // _animator.transform.localPosition = Vector3.zero;
         }
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   <HorizontalSpeed>k__BackingField: 5
   <HorizontalLimit>k__BackingField: 2
   <StackLimit>k__BackingField: 10
-  <StackCollectOffset>k__BackingField: 0.5
+  <StackCollectOffset>k__BackingField: 0.75
   <StackCollectDuration>k__BackingField: 0.5
   <StackCollectEase>k__BackingField: 2
   <StackCollectJumpPower>k__BackingField: 2
