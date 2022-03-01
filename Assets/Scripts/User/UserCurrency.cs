@@ -1,18 +1,30 @@
+using System;
+using Core;
 using UnityEngine;
 
 namespace User
 {
     public class UserCurrency : MonoBehaviour
     {
-        public int CurrentCurrency { get; private set; }
+        private int _levelCurrency = 0;
+        
+        public void AddCurrency(int amount) => _levelCurrency += amount;
 
-        public void AddCurrency(int amount) => CurrentCurrency += amount;
-
-        public bool SpendCurrency(int amount)
+        private void OnEnable()
         {
-            if (CurrentCurrency < amount) return false;
-            CurrentCurrency -= amount;
-            return true;
+            EventBus.OnLevelReset += OnLevelReset;
+            //EventBus.OnLevelWin 
+        }
+
+        private void OnDisable()
+        {
+            EventBus.OnLevelReset -= OnLevelReset;
+
+        }
+
+        private void OnLevelReset()
+        {
+            _levelCurrency = 0;
         }
     }
 }

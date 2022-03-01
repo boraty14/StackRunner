@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Core
 {
-    [ExecuteInEditMode][SaveDuringPlay][AddComponentMenu("")] // Hide in menu
+    //[ExecuteInEditMode][SaveDuringPlay][AddComponentMenu("")] // Hide in menu
     public class GameCameraHandler : CinemachineExtension
     {
         [SerializeField] private SGameCamera gameCameraSettings;
@@ -20,6 +20,7 @@ namespace Core
         protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, 
             CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
         {
+            if (!Application.isPlaying) return;
             if (!gameCameraSettings.LockXAxis) return;
             if (stage == CinemachineCore.Stage.Body)
             {

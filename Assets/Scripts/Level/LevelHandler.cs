@@ -8,7 +8,7 @@ using Utils;
 
 namespace Level
 {
-    public class LevelHandler : MonoBehaviourSingleton<LevelHandler>
+    public class LevelHandler : MonoBehaviour
     {
         [SerializeField] private SLevels levels;
         

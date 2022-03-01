@@ -11,9 +11,11 @@ using Utils;
 
 namespace UI
 {
-    public class UIHandler : MonoBehaviourSingleton<UIHandler>
+    public class UIHandler : MonoBehaviour
     {
         [SerializeField] private SFade fadeSettings;
+
+        private LevelHandler _levelHandler;
         
         //images
         private Image _fadeImage;
@@ -22,17 +24,23 @@ namespace UI
         private GameObject _fadePanel;
         private GameObject _tapToPlayPanel;
         private GameObject _gamePlayPanel;
-        private GameObject _levelEndPanel;
+        private GameObject _levelEndPanel; 
         
         private void Awake()
         {
             GetPanels();
         }
 
+        private void Start()
+        {
+            _levelHandler = FindObjectOfType<LevelHandler>();
+        }
+
         private void OnEnable()
         {
             EventBus.OnLevelReset += OnLevelReset;
             EventBus.OnTapToPlay += OnTapToPlay;
+            EventBus.OnPressNextLevel += OnPressNextLevel;
             EventBus.OnLevelWin += OnLevelWin;
         }
 
@@ -40,20 +48,37 @@ namespace UI
         {
             EventBus.OnLevelReset -= OnLevelReset;
             EventBus.OnTapToPlay -= OnTapToPlay;
+            EventBus.OnPressNextLevel -= OnPressNextLevel;
             EventBus.OnLevelWin -= OnLevelWin;
         }
 
         private void OnLevelReset()
         {
-            
+            _tapToPlayPanel.SetActive(true);
         }
-
+        
         private void OnTapToPlay()
         {
+            _tapToPlayPanel.SetActive(false);
         }
-
+        
+        private void OnPressNextLevel()
+        {
+            StartCoroutine(PressNextLevelRoutine());
+        }
+        
+        private IEnumerator PressNextLevelRoutine()
+        {
+            _levelEndPanel.SetActive(false);
+            yield return WaitForFade(1f, fadeSettings.FadeDuration, fadeSettings.FadeEase);
+            _levelHandler.GoNextLevel();
+            yield return WaitForFade(0f, fadeSettings.FadeDuration, fadeSettings.FadeEase);
+            _tapToPlayPanel.SetActive(true);
+        }
+        
         private void OnLevelWin()
         {
+            
         }
 
         private YieldInstruction WaitForFade(float targetFade,float fadeDuration,Ease fadeEase = Ease.InSine)
@@ -65,25 +90,9 @@ namespace UI
             }).WaitForCompletion();
         }
 
-        public void PressTapToPlay()
-        {
-            EventBus.OnTapToPlay?.Invoke();
-        }
+        
 
-        public void PressNextLevel()
-        {
-            StartCoroutine(PressNextLevelRoutine());
-            
-        }
-
-        private IEnumerator PressNextLevelRoutine()
-        {
-            _levelEndPanel.SetActive(false);
-            yield return WaitForFade(1f, fadeSettings.FadeDuration, fadeSettings.FadeEase);
-            LevelHandler.Instance.GoNextLevel();
-            yield return WaitForFade(0f, fadeSettings.FadeDuration, fadeSettings.FadeEase);
-            _tapToPlayPanel.SetActive(true);
-        }
+        
 
         private void GetPanels()
         {

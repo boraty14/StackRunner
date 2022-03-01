@@ -13,6 +13,8 @@ namespace SO
         [field: SerializeField][field: Range(0,10f)] public float HorizontalLimit { get; private set; }
         
         [field :Title("Stack Collect Settings")]
+        [field: SerializeField] public Transform StackPrefab { get; private set; }
+
         [field: SerializeField] public int StackLimit { get; private set; }
         [field: SerializeField] public float StackCollectOffset { get; private set; }
         [field: SerializeField] public float StackCollectDuration { get; private set; }

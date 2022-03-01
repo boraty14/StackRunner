@@ -1,18 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Core;
+using TMPro;
 using UnityEngine;
 
-public class CurrencyPresenter : MonoBehaviour
+namespace UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class CurrencyPresenter : MonoBehaviour
     {
-        
-    }
+        private TextMeshProUGUI _currencyText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Start()
+        {
+            _currencyText = GetComponent<TextMeshProUGUI>();
+            UpdateCurrencyText();
+        }
+
+        private void OnEnable()
+        {
+            EventBus.OnLevelReset += OnLevelReset;
+            EventBus.OnStackBuy += OnStackBuy;
+
+        }
+        private void OnDisable()
+        {
+            EventBus.OnLevelReset -= OnLevelReset;
+            EventBus.OnStackBuy -= OnStackBuy;
+        }
+
+        private void OnLevelReset()
+        {
+            UpdateCurrencyText();
+        }
+
+        private void OnStackBuy()
+        {
+            UpdateCurrencyText();
+        }
+
+        private void UpdateCurrencyText()
+        {
+            int currentCurrency = SaveHandler.LoadCurrency();
+            _currencyText.text = $"{currentCurrency}";
+        }
     }
 }

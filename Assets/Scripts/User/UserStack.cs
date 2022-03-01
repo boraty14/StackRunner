@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Core;
 using DG.Tweening;
 using SO;
 using UnityEngine;
@@ -12,7 +13,6 @@ namespace User
         [SerializeField] private SUser userSettings;
         private List<Transform> _stackables;
         private Transform _stackBasePoint;
-        private int _stackLimit;
 
         #region Events
         public Action<float> OnStackRatioChange;
@@ -23,6 +23,55 @@ namespace User
         {
             _stackBasePoint = transform.Find("StackBasePoint");
             _stackables = new List<Transform>();
+        }
+
+        private void OnEnable()
+        {
+            EventBus.OnLevelReset += OnLevelReset;
+            EventBus.OnLevelWin += OnLevelWin;
+            EventBus.OnStackBuy += OnStackBuy;
+        }
+
+        private void OnDisable()
+        {
+            EventBus.OnLevelReset -= OnLevelReset;
+            EventBus.OnLevelWin -= OnLevelWin;
+            EventBus.OnStackBuy -= OnStackBuy;
+        }
+
+        private void OnLevelReset()
+        {
+            AddStartingStacks();
+        }
+
+        private void OnStackBuy()
+        {
+            DestroyStacks();
+            AddStartingStacks();
+        }
+
+        private void OnLevelWin()
+        {
+            DestroyStacks();
+        }
+
+        private void AddStartingStacks()
+        {
+            int startingStackAmount = SaveHandler.LoadStartingStack();
+            for (int i = 0; i < startingStackAmount; i++)
+            {
+                var newStack = Instantiate(userSettings.StackPrefab);
+                AddStack(newStack);
+            }
+        }
+
+        private void DestroyStacks()
+        {
+            foreach (var stackable in _stackables)
+            {
+                Destroy(stackable.gameObject);
+            }
+            _stackables.Clear();
         }
 
         public void AddStack(Transform stackTransform)
