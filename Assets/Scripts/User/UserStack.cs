@@ -1,18 +1,18 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Core;
 using DG.Tweening;
 using SO;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace User
 {
     public class UserStack : MonoBehaviour
     {
         [SerializeField] private SUser userSettings;
-        private List<Transform> _stackables;
-        private Transform _stackBasePoint;
+        [SerializeField] private Image stackBar;
+
+        private float _targetStackBarAmount = 0f;
 
         #region Events
         public Action<float> OnStackRatioChange;
@@ -21,8 +21,7 @@ namespace User
 
         private void Awake()
         {
-            _stackBasePoint = transform.Find("StackBasePoint");
-            _stackables = new List<Transform>();
+            
         }
 
         private void OnEnable()
@@ -46,69 +45,51 @@ namespace User
 
         private void OnStackBuy()
         {
-            DestroyStacks();
+            ResetStacks();
             AddStartingStacks();
         }
 
         private void OnLevelWin()
         {
-            DestroyStacks();
+            ResetStacks();
         }
 
         private void AddStartingStacks()
         {
             int startingStackAmount = SaveHandler.LoadStartingStack();
-            for (int i = 0; i < startingStackAmount; i++)
-            {
-                var newStack = Instantiate(userSettings.StackPrefab);
-                AddStack(newStack);
-            }
+            stackBar.fillAmount = (float)startingStackAmount / userSettings.StackLimit;
+            _targetStackBarAmount = stackBar.fillAmount;
         }
 
-        private void DestroyStacks()
+        private void ResetStacks()
         {
-            foreach (var stackable in _stackables)
-            {
-                Destroy(stackable.gameObject);
-            }
-            _stackables.Clear();
+            stackBar.fillAmount = 0f;
+            _targetStackBarAmount = 0f;
         }
 
-        public void AddStack(Transform stackTransform)
+        public void AddStack()
         {
-            if (_stackables.Count == userSettings.StackLimit) return;
-            stackTransform.SetParent(transform, true);
-            _stackables.Add(stackTransform);
-            OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
-            StartCoroutine(ReplaceStackRoutine(stackTransform));
+            float changeRatio = 1f / userSettings.StackLimit;
+            ChangeStackAmount(changeRatio);
+            //OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
         }
 
         public void RemoveStack(int amount)
         {
             OnHitObstacle?.Invoke();
-            if (_stackables.Count == 0) return;
-            if (amount > _stackables.Count) amount = _stackables.Count;
-            for (int i = 0; i < amount; i++)
-            {
-                Transform currentStack = _stackables[_stackables.Count - 1];
-                currentStack.DOScale(Vector3.zero, userSettings.StackDestroyDuration)
-                    .SetEase(userSettings.StackDestroyEase).OnComplete(() => Destroy(currentStack.gameObject));
-                _stackables.RemoveAt(_stackables.Count - 1);
-            }
-            OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
+            float changeRatio = -amount *  (1f / userSettings.StackLimit);
+            ChangeStackAmount(changeRatio);
+            //OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
         }
 
-        private IEnumerator ReplaceStackRoutine(Transform stackTransform)
+        private void ChangeStackAmount(float changeAmount)
         {
-            Vector3 targetLocalPos = _stackBasePoint.localPosition +
-                                     _stackables.Count * userSettings.StackCollectOffset * Vector3.up;
-            Sequence replaceSequence = DOTween.Sequence();
-            replaceSequence.Join(stackTransform
-                .DOLocalJump(targetLocalPos, userSettings.StackCollectJumpPower, 1, userSettings.StackCollectDuration)
-                .SetEase(userSettings.StackCollectEase));
-            replaceSequence.Join(stackTransform.DOLocalRotate(Vector3.zero, userSettings.StackCollectDuration)
-                .SetEase(userSettings.StackCollectEase));
-            yield return replaceSequence.WaitForCompletion();
+            stackBar.DOKill();
+            _targetStackBarAmount += changeAmount;
+            _targetStackBarAmount = Mathf.Clamp(_targetStackBarAmount, 0f, 1f);
+            OnStackRatioChange?.Invoke(_targetStackBarAmount);
+            stackBar.DOFillAmount(_targetStackBarAmount, userSettings.StackChangeDuration)
+                .SetEase(userSettings.StackChangeEase);
         }
     }
 }

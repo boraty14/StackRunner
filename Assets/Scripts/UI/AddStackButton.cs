@@ -1,13 +1,16 @@
 using Core;
+using SO;
 using UnityEngine;
 
 namespace UI
 {
     public class AddStackButton : MonoBehaviour
     {
+        [SerializeField] private SUser userSettings;
         public void AddStack()
         {
             int currentStackAmount = SaveHandler.LoadStartingStack();
+            if (currentStackAmount >= userSettings.StackLimit) return;
             int currentPrice = (int)Mathf.Pow(2, currentStackAmount);
             int currentCurrency = SaveHandler.LoadCurrency();
             if (currentCurrency < currentPrice) return;

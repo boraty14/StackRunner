@@ -15,14 +15,9 @@ MonoBehaviour:
   <VerticalSpeed>k__BackingField: 9
   <HorizontalSpeed>k__BackingField: 3
   <HorizontalLimit>k__BackingField: 3
-  <StackPrefab>k__BackingField: {fileID: 5653888041923273412, guid: 5bf8fe27862748144a527c9733178bb8, type: 3}
   <StackLimit>k__BackingField: 10
-  <StackCollectOffset>k__BackingField: 0.75
-  <StackCollectDuration>k__BackingField: 0.5
-  <StackCollectEase>k__BackingField: 2
-  <StackCollectJumpPower>k__BackingField: 2
-  <StackDestroyDuration>k__BackingField: 0.5
-  <StackDestroyEase>k__BackingField: 2
+  <StackChangeDuration>k__BackingField: 0.5
+  <StackChangeEase>k__BackingField: 2
   <CrossFadePercentage>k__BackingField: 0.025
   <WinParticle>k__BackingField: {fileID: 198825929368372608, guid: edf12e91890b8434eb8ea701f9bc40a2, type: 3}
   <HitParticle>k__BackingField: {fileID: 198104090543139058, guid: 4430919f14c50f84085d287cbcb2c30e, type: 3}

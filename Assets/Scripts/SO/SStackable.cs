@@ -6,5 +6,6 @@ namespace SO
     public class SStackable : ScriptableObject
     {
         [field: SerializeField] public ParticleSystem StackParticle { get; private set; }
+        [field: SerializeField] public float StackDestroyDuration { get; private set; }
     }
 }

@@ -12,8 +12,9 @@ namespace Interactables
 
         protected override void OnInteract(Collider other)
         {
-            other.GetComponent<UserStack>().AddStack(transform);
-            _animator.Play("StackCollect");
+            other.GetComponent<UserStack>().AddStack();
+            _animator.gameObject.SetActive(false);
+            Destroy(gameObject,stackableSettings.StackDestroyDuration);
         }
     }
 }

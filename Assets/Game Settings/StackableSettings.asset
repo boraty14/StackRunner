@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: StackableSettings
   m_EditorClassIdentifier: 
   <StackParticle>k__BackingField: {fileID: 198985388140249450, guid: f36719335e2592340b7bbb6a8ea33882, type: 3}
+  <StackDestroyDuration>k__BackingField: 0.5
