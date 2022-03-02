@@ -18,30 +18,21 @@ namespace UI
 
         private void Start()
         {
-            _userCurrency = FindObjectOfType<UserCurrency>();
             _userCurrency.OnCurrencyAdded += OnCurrencyAdded;
         }
 
         private void OnEnable()
         {
-            EventBus.OnLevelReset += OnLevelReset;
-            UpdateLevelCurrencyText(0);
-        }
-
-        private void OnDisable()
-        {
-            EventBus.OnLevelReset -= OnLevelReset;
+            if(!_userCurrency) _userCurrency = FindObjectOfType<UserCurrency>();
+            int currentCurrency = _userCurrency.GetCurrentCurrency();
+            UpdateLevelCurrencyText(currentCurrency);
         }
 
         private void OnDestroy()
         {
             _userCurrency.OnCurrencyAdded -= OnCurrencyAdded;
         }
-
-        private void OnLevelReset()
-        {
-            UpdateLevelCurrencyText(0);
-        }
+        
 
         private void OnCurrencyAdded(int newLevelCurrency)
         {

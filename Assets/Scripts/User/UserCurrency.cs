@@ -10,6 +10,8 @@ namespace User
         
         public Action<int> OnCurrencyAdded;
 
+        public int GetCurrentCurrency() => _levelCurrency;
+
         public void AddCurrency(int amount)
         {
             _levelCurrency += amount;
@@ -19,18 +21,24 @@ namespace User
         private void OnEnable()
         {
             EventBus.OnLevelReset += OnLevelReset;
+            EventBus.OnTapToPlay += OnTapToPlay;
             EventBus.OnLevelWin += OnLevelWin;
         }
 
         private void OnDisable()
         {
             EventBus.OnLevelReset -= OnLevelReset;
+            EventBus.OnTapToPlay -= OnTapToPlay;
             EventBus.OnLevelWin -= OnLevelWin;
         }
 
         private void OnLevelReset()
         {
             _levelCurrency = 0;
+        }
+        
+        private void OnTapToPlay()
+        {
             OnCurrencyAdded?.Invoke(_levelCurrency);
         }
         

@@ -20,8 +20,9 @@ namespace Core
         protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, 
             CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
         {
-            if (!Application.isPlaying) return;
             if (!gameCameraSettings.LockXAxis) return;
+            if (!Application.isPlaying) return;
+
             if (stage == CinemachineCore.Stage.Body)
             {
                 var currentPosition = state.RawPosition;
