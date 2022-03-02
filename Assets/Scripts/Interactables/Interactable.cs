@@ -23,16 +23,8 @@ namespace Interactables
         {
             if(!other.CompareTag("Player")) return;
             Instantiate(InteractionParticle, transform);
-            ResetModel();
-            OnInteract(other);
-        }
-
-        private void ResetModel()
-        {
             _collider.enabled = false;
-            // _animator.enabled = false;
-            // _animator.transform.rotation = Quaternion.Euler(Vector3.zero);
-            // _animator.transform.localPosition = Vector3.zero;
+            OnInteract(other);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using Cinemachine;
 using Core;
+using Level;
 using UnityEngine;
 
 namespace Cameras
@@ -8,6 +9,8 @@ namespace Cameras
     public class WinCameraHandler : MonoBehaviour
     {
         private CinemachineVirtualCamera _vCam;
+        private LevelHandler _levelHandler;
+        
         private void Awake()
         {
             _vCam = GetComponent<CinemachineVirtualCamera>();
@@ -15,17 +18,18 @@ namespace Cameras
 
         private void OnEnable()
         {
-            EventBus.OnLevelReset += OnLevelReset;
+            if (!_levelHandler) _levelHandler = FindObjectOfType<LevelHandler>();
+            _levelHandler.OnGoNextLevel += OnGoNextLevel;
             EventBus.OnLevelWin += OnLevelWin;
         }
 
         private void OnDisable()
         {
-            EventBus.OnLevelReset -= OnLevelReset;
+            _levelHandler.OnGoNextLevel -= OnGoNextLevel;
             EventBus.OnLevelWin -= OnLevelWin;
         }
 
-        private void OnLevelReset()
+        private void OnGoNextLevel()
         {
             _vCam.enabled = false;
         }

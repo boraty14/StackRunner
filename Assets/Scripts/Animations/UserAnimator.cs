@@ -53,7 +53,6 @@ namespace Animations
         private void OnLevelWin()
         {
             _animator.CrossFade("Dance",userSettings.CrossFadePercentage);
-            Debug.Log("alo");
         }
 
 

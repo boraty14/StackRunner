@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Core;
@@ -14,6 +15,8 @@ namespace Level
         
         private List<SLevel> _randomLevels = new List<SLevel>();
         private GameObject _currentLevelInstance;
+
+        public Action OnGoNextLevel;
         
         private void Start()
         {
@@ -24,7 +27,6 @@ namespace Level
         private void GenerateLevels()
         {
             _randomLevels = new List<SLevel>(levels.Levels);
-            
             int currentLevelIndex = SaveHandler.LoadLevel();
             if (currentLevelIndex >= _randomLevels.Count)
             {
@@ -34,14 +36,20 @@ namespace Level
 
         public void GoNextLevel()
         {
+            StartCoroutine(GoNextLevelRoutine());
+        }
+
+        private IEnumerator GoNextLevelRoutine()
+        {
+            OnGoNextLevel?.Invoke();
+            yield return null;
             int currentLevelIndex = SaveHandler.LoadLevel();
             SaveHandler.SaveLevel(currentLevelIndex+1);
-            if (currentLevelIndex + 1 % _randomLevels.Count == 0)
+            if ((currentLevelIndex + 1) % _randomLevels.Count == 0)
             {
                 _randomLevels.ShuffleList();
             }
             ResetLevel();
-
         }
 
         private void ResetLevel()
@@ -52,7 +60,7 @@ namespace Level
             }
             
             int currentLevelIndex = SaveHandler.LoadLevel();
-            _currentLevelInstance = Instantiate(levels.Levels[currentLevelIndex % _randomLevels.Count].LevelPrefab);
+            _currentLevelInstance = Instantiate(_randomLevels[currentLevelIndex % _randomLevels.Count].LevelPrefab);
             EventBus.OnLevelReset?.Invoke();
         }
     }

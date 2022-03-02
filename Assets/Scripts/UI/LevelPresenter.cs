@@ -21,7 +21,7 @@ namespace UI
         private void OnLevelReset()
         {
             int level = SaveHandler.LoadLevel();
-            _levelText.text = $"LEVEL {level}";
+            _levelText.text = $"LEVEL {level+1}";
         }
         
     }

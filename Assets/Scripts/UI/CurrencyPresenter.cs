@@ -1,4 +1,5 @@
 using Core;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using User;
@@ -8,17 +9,17 @@ namespace UI
     public class CurrencyPresenter : MonoBehaviour
     {
         private TextMeshProUGUI _currencyText;
-
-        private void Start()
+        
+        private void Awake()
         {
             _currencyText = GetComponent<TextMeshProUGUI>();
-            UpdateCurrencyText();
         }
 
         private void OnEnable()
         {
             EventBus.OnLevelReset += OnLevelReset;
             EventBus.OnStackBuy += OnStackBuy;
+            UpdateCurrencyText();
         }
         
         private void OnDisable()
