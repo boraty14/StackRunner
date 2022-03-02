@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Cinemachine;
 using SO;
 using UnityEngine;
@@ -10,12 +12,40 @@ namespace Core
     {
         [SerializeField] private SGameCamera gameCameraSettings;
 
+        private Vector3 _startingPosition;
         private float _startingX;
-        
-        void Start()
+
+        protected override void Awake()
         {
+            base.Awake();
+            _startingPosition = transform.position;
             _startingX = transform.position.x;
         }
+        
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            EventBus.OnLevelReset += OnLevelReset;
+        }
+
+        private void OnDisable()
+        {
+            EventBus.OnLevelReset -= OnLevelReset;
+        }
+
+        private void OnLevelReset()
+        {
+            StartCoroutine(LevelResetRoutine());
+        }
+
+        private IEnumerator LevelResetRoutine()
+        {
+            GetComponent<CinemachineVirtualCamera>().enabled = false;
+            transform.position = _startingPosition;
+            yield return null;
+            GetComponent<CinemachineVirtualCamera>().enabled = true;
+        }
+
 
         protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, 
             CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
