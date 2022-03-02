@@ -1,23 +1,24 @@
-using System;
 using System.Collections;
 using Cinemachine;
+using Core;
 using SO;
 using UnityEngine;
 
-
-namespace Core
+namespace Cameras
 {
-    //[ExecuteInEditMode][SaveDuringPlay][AddComponentMenu("")] // Hide in menu
+    [ExecuteInEditMode][SaveDuringPlay][AddComponentMenu("")] // Hide in menu
     public class GameCameraHandler : CinemachineExtension
     {
         [SerializeField] private SGameCamera gameCameraSettings;
 
+        private CinemachineVirtualCamera _vCam;
         private Vector3 _startingPosition;
         private float _startingX;
 
         protected override void Awake()
         {
             base.Awake();
+            _vCam = GetComponent<CinemachineVirtualCamera>();
             _startingPosition = transform.position;
             _startingX = transform.position.x;
         }
@@ -37,13 +38,14 @@ namespace Core
         {
             StartCoroutine(LevelResetRoutine());
         }
+        
 
         private IEnumerator LevelResetRoutine()
         {
-            GetComponent<CinemachineVirtualCamera>().enabled = false;
+            _vCam.enabled = false;
             transform.position = _startingPosition;
             yield return null;
-            GetComponent<CinemachineVirtualCamera>().enabled = true;
+            _vCam.enabled = true;
         }
 
 
