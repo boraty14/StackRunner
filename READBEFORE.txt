@@ -1,0 +1,12 @@
+IMPORTANT: This game uses new input system. To play it in the
+editor you should enable Window => Analysis => Input Debugger
+=> Options => Simulate Touch Input From Pen or Mouse
+
+You can set all the game settings from GameSettings folder
+via ScriptableObjects
+
+Used plugins:
+
+Editor Console Pro: For better debugging experience.
+Dotween Pro: For setting animation and fade ease.
+Odin Inspector: For improved inspector attributes
