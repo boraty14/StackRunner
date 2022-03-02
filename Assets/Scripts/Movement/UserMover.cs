@@ -14,17 +14,20 @@ namespace Movement
         private Vector3 _movementVector = Vector3.zero;
         private float _horizontalTarget = 0f;
         private bool _isPlaying = false;
+        private Vector3 _startingPosition;
 
 
         private void Awake()
         {
             _touchControls = new TouchControls();
+            _startingPosition = transform.position;
         }
 
         private void OnEnable()
         {
             _touchControls.Enable();
             _touchControls.Touch.PrimaryDrag.performed += OnDrag;
+            EventBus.OnLevelReset += OnLevelReset;
             EventBus.OnTapToPlay += OnTapToPlay;
             EventBus.OnLevelWin += OnLevelWin;
         }
@@ -33,6 +36,7 @@ namespace Movement
         {
             _touchControls.Touch.PrimaryDrag.performed -= OnDrag;
             _touchControls.Disable();
+            EventBus.OnLevelReset -= OnLevelReset;
             EventBus.OnTapToPlay -= OnTapToPlay;
             EventBus.OnLevelWin -= OnLevelWin;
         }
@@ -44,6 +48,11 @@ namespace Movement
             SetForwardMovement();
             SetHorizontalMovement();
             transform.Translate(_movementVector);
+        }
+        
+        private void OnLevelReset()
+        {
+            transform.position = _startingPosition;
         }
         
         private void OnLevelWin()

@@ -71,9 +71,11 @@ namespace UI
         private IEnumerator PressNextLevelRoutine()
         {
             _levelEndPanel.SetActive(false);
+            _fadePanel.SetActive(true);
             yield return WaitForFade(1f, fadeSettings.FadeDuration, fadeSettings.FadeEase);
             _levelHandler.GoNextLevel();
             yield return WaitForFade(0f, fadeSettings.FadeDuration, fadeSettings.FadeEase);
+            _fadePanel.SetActive(false);
             _tapToPlayPanel.SetActive(true);
         }
         

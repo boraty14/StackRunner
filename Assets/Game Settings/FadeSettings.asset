@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FadeSettings
   m_EditorClassIdentifier: 
   <FadeDuration>k__BackingField: 1
-  <FadeEase>k__BackingField: 2
+  <FadeEase>k__BackingField: 1
