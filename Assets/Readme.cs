@@ -1,3 +1,10 @@
+/*
+ * TODO:
+ * add level end ui
+ * add camera transitions and settings
+ * add gameplay ui
+ */
+
 /* Hey there! This is Zerosum's Case Project
  * 
  * It's about creating a stacking runner project using given assets.

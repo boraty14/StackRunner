@@ -1,7 +1,7 @@
-using System;
 using Core;
 using TMPro;
 using UnityEngine;
+using User;
 
 namespace UI
 {
@@ -19,12 +19,13 @@ namespace UI
         {
             EventBus.OnLevelReset += OnLevelReset;
             EventBus.OnStackBuy += OnStackBuy;
-
         }
+        
         private void OnDisable()
         {
             EventBus.OnLevelReset -= OnLevelReset;
             EventBus.OnStackBuy -= OnStackBuy;
+            
         }
 
         private void OnLevelReset()

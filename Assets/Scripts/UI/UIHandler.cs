@@ -60,6 +60,7 @@ namespace UI
         private void OnTapToPlay()
         {
             _tapToPlayPanel.SetActive(false);
+            _gamePlayPanel.SetActive(true);
         }
         
         private void OnPressNextLevel()
@@ -78,7 +79,8 @@ namespace UI
         
         private void OnLevelWin()
         {
-            
+            _gamePlayPanel.SetActive(false);
+            _levelEndPanel.SetActive(true);
         }
 
         private YieldInstruction WaitForFade(float targetFade,float fadeDuration,Ease fadeEase = Ease.InSine)
@@ -89,11 +91,7 @@ namespace UI
                 _fadeImage.raycastTarget = false;
             }).WaitForCompletion();
         }
-
         
-
-        
-
         private void GetPanels()
         {
             // Side Note: I am well aware that you can set these objects

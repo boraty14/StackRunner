@@ -32,7 +32,7 @@ namespace UI
         {
             int currentStackAmount = SaveHandler.LoadStartingStack();
             int currentPrice = (int)Mathf.Pow(2, currentStackAmount);
-            _stackPriceText.text = $"Add Stack {currentPrice}";
+            _stackPriceText.text = $"ADD STACK ({currentPrice}$)";
         }
     }
 }

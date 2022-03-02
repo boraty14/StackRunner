@@ -9,5 +9,6 @@ namespace Core
         public static Action OnPressNextLevel;
         public static Action OnLevelWin;
         public static Action OnStackBuy;
+
     }
 }

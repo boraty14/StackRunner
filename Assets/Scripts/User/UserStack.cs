@@ -19,11 +19,6 @@ namespace User
         public Action OnHitObstacle;
         #endregion
 
-        private void Awake()
-        {
-            
-        }
-
         private void OnEnable()
         {
             EventBus.OnLevelReset += OnLevelReset;
@@ -40,6 +35,7 @@ namespace User
 
         private void OnLevelReset()
         {
+            stackBar.transform.parent.gameObject.SetActive(true);
             AddStartingStacks();
         }
 
@@ -52,6 +48,7 @@ namespace User
         private void OnLevelWin()
         {
             ResetStacks();
+            stackBar.transform.parent.gameObject.SetActive(false);
         }
 
         private void AddStartingStacks()
@@ -59,6 +56,7 @@ namespace User
             int startingStackAmount = SaveHandler.LoadStartingStack();
             stackBar.fillAmount = (float)startingStackAmount / userSettings.StackLimit;
             _targetStackBarAmount = stackBar.fillAmount;
+            OnStackRatioChange?.Invoke(_targetStackBarAmount);
         }
 
         private void ResetStacks()
@@ -71,7 +69,6 @@ namespace User
         {
             float changeRatio = 1f / userSettings.StackLimit;
             ChangeStackAmount(changeRatio);
-            //OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
         }
 
         public void RemoveStack(int amount)
@@ -79,7 +76,6 @@ namespace User
             OnHitObstacle?.Invoke();
             float changeRatio = -amount *  (1f / userSettings.StackLimit);
             ChangeStackAmount(changeRatio);
-            //OnStackRatioChange?.Invoke((float)_stackables.Count / userSettings.StackLimit);
         }
 
         private void ChangeStackAmount(float changeAmount)
